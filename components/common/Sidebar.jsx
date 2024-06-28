@@ -6,65 +6,40 @@ import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
 import { MenuContext } from "../../components/common/MenuContext";
 import { GoDash } from "react-icons/go";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { LucideLassoSelect } from "lucide-react";
 
 const Sidebar = ({ children }) => {
   const { open } = useContext(MenuContext);
   return (
-    <div className="bg-white  min-h-screen">
+    <div className="bg-white ml-60 min-h-screen">
       <MainHeader />
 
       <div className="flex justify-start items-start ">
-        <aside className="bg-white rounded-lg absolute inset-y-0 left-0 border border-gray-200 shadow-sm w-2/12">
-          <div className="h-4 w-48 absolute left-16 top-4 ">
-            <img src="https://fervidsmart.com/dist/assets/img/logo/Fervid_Logo_svg.svg"></img>
-          </div>
-          <div className="flex justify-start items-center cursor-pointer  rounded-xl absolute top-20 left-10">
-            <IoHomeSharp className="mr-2" />
-            <Link href="/dashboard">Dashboard</Link>
-          </div>
-          <div className="absolute top-32 w-48 left-10">
-            <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Products</AccordionTrigger>
-                <AccordionContent>
-                  <Link href="/Products/productslist"> Products List</Link>
-                </AccordionContent>
-                <AccordionContent>
-                  <Link href="/Products/addproducts">Add Product</Link>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Categories</AccordionTrigger>
-                <AccordionContent>
-                  <a href="https://google.com" className="cursor-pointer">
-                    Products{" "}
-                  </a>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Sales</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>Purchases</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
+        <aside className="bg-white  absolute inset-y-0 left-0 border border-gray-200 shadow-sm w-60 p-1">
+          <ul>
+            <li className="flex justify-start items-center cursor-pointer  rounded-xl absolute top-20 hover:bg-blue-200">
+              <IoHomeSharp className="mr-2" />
+              <div>
+                <Link href="/dashboard">Dashboard</Link>
+              </div>
+            </li>
+            <li className="flex justify-start items-center cursor-pointer  rounded-xl absolute top-32">
+              <div className="w-full flex flex-row justify-start items-center">
+                <FaShoppingCart className="mr-2" />
+                <h3 className="flex-1">Products</h3>
+              </div>
+
+              <li className="flex justify-start items-center ml-14 gap-1 absolute top-8">
+                <GoDash />
+                <li href="/Products/productslist">Products list</li>
+              </li>
+            </li>
+          </ul>
         </aside>
-        <div className="absolute inset-y-0 right-0 w-5/6 top-24">
+        <div className="flex-1">
           <main>{children}</main>
         </div>
       </div>
