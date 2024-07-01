@@ -1,12 +1,13 @@
-import React from 'react'
-import  { AddProducts } from '../../../components/products/AddProducts'
+"use client";
+import React from "react";
+import { AddProducts } from "../../../components/products/AddProducts";
 
 const page = () => {
   return (
     <div>
-      <AddProducts/>
+      <AddProducts />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

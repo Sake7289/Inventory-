@@ -10,8 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { RiArrowUpDownFill } from "react-icons/ri";
-
 export const Products = [
   {
     id: 1,
@@ -76,7 +74,6 @@ export const Products = [
     brand: "Ray-Ban",
     quantity: 1.0,
   },
-  // Add more products if needed to test pagination
 ];
 
 export function TableDemo() {
@@ -122,7 +119,9 @@ export function TableDemo() {
   };
 
   const filteredProducts = sortedProducts.filter((product) =>
-    product.product.toLowerCase().includes(searchQuery.toLowerCase())
+    Object.values(product).some((value) =>
+      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    )
   );
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -142,7 +141,7 @@ export function TableDemo() {
     <div>
       <input
         type="text"
-        placeholder="Search products..."
+        placeholder="Search..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="mb-4 p-2 border border-gray-300 rounded"
@@ -152,7 +151,7 @@ export function TableDemo() {
           value={itemsPerPage}
           onChange={(e) => {
             setItemsPerPage(parseInt(e.target.value, 10));
-            setCurrentPage(1); // Reset to the first page when items per page changes
+            setCurrentPage(1);
           }}
           className="p-2 border border-gray-300 rounded"
         >
@@ -181,18 +180,43 @@ export function TableDemo() {
                 onChange={handleSelectAll}
               />
             </TableHead>
+
             <TableHead
-              className="text-left flex items-center"
+              className="text-left flex items-center hover:cursor-pointer"
               onClick={() => handleSort("product")}
             >
               Product
-              <RiArrowUpDownFill className="ml-1 hover:cursor-pointer" />
             </TableHead>
-            <TableHead>Code</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Brand Name</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead
+              className=" hover:cursor-pointer"
+              onClick={() => handleSort("code")}
+            >
+              Code
+            </TableHead>
+            <TableHead
+              className="hover:cursor-pointer"
+              onClick={() => handleSort("category")}
+            >
+              Category
+            </TableHead>
+            <TableHead
+              className="hover:cursor-pointer"
+              onClick={() => handleSort("brand")}
+            >
+              Brand Name
+            </TableHead>
+            <TableHead
+              className="hover:cursor-pointer"
+              onClick={() => handleSort("quantity")}
+            >
+              Quantity
+            </TableHead>
+            <TableHead
+              className="text-right hover:cursor-pointer"
+              onClick={() => handleSort("price")}
+            >
+              Amount
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
